@@ -35,11 +35,6 @@
     },
     {
       "type": "extension",
-      "name": "openai_v2v_python",
-      "version": "=0.1.0"
-    },
-    {
-      "type": "extension",
       "name": "message_collector",
       "version": "=0.1.0"
     },
@@ -71,76 +66,6 @@
     {
       "type": "extension",
       "name": "deepgram_asr_python",
-      "version": "=0.1.0"
-    },
-    {
-      "type": "extension",
-      "name": "vision_tool_python",
-      "version": "=0.1.0"
-    },
-    {
-      "type": "extension",
-      "name": "vision_analyze_tool_python",
-      "version": "=0.1.0"
-    },
-    {
-      "type": "extension",
-      "name": "transcribe_asr_python",
-      "version": "=0.1.0"
-    },
-    {
-      "type": "extension",
-      "name": "gemini_llm_python",
-      "version": "=0.1.0"
-    },
-    {
-      "type": "extension",
-      "name": "bedrock_llm_python",
-      "version": "=0.1.0"
-    },
-    {
-      "type": "extension",
-      "name": "polly_tts",
-      "version": "=0.1.0"
-    },
-    {
-      "type": "extension",
-      "name": "minimax_tts_python",
-      "version": "=0.1.0"
-    },
-    {
-      "type": "extension",
-      "name": "minimax_v2v_python",
-      "version": "=0.1.0"
-    },
-    {
-      "type": "extension",
-      "name": "cosy_tts_python",
-      "version": "=0.1.0"
-    },
-    {
-      "type": "extension",
-      "name": "elevenlabs_tts_python",
-      "version": "=0.1.0"
-    },
-    {
-      "type": "extension",
-      "name": "dify_python",
-      "version": "=0.1.0"
-    },
-    {
-      "type": "extension",
-      "name": "gemini_v2v_python",
-      "version": "=0.1.0"
-    },
-    {
-      "type": "extension",
-      "name": "coze_python_async",
-      "version": "=0.1.0"
-    },
-    {
-      "type": "extension",
-      "name": "openai_image_generate_tool",
       "version": "=0.1.0"
     }
   ]
