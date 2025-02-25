@@ -1,0 +1,65 @@
+{
+  "type": "extension",
+  "name": "agora_tts",
+  "version": "0.1.0",
+  "dependencies": [
+    {
+      "type": "system",
+      "name": "ten_runtime_python",
+      "version": "0.8"
+    }
+  ],
+  "api": {
+    "property": {
+      "api_key": {
+        "type": "string"
+      },
+      "voice_id": {
+        "type": "int"
+      },
+      "dump": {
+        "type": "bool"
+      }
+    },
+    "data_in": [
+      {
+        "name": "text_data",
+        "property": {
+          "text": {
+            "type": "string"
+          }
+        }
+      }
+    ],
+    "cmd_in": [
+      {
+        "name": "flush",
+        "property": {}
+      },
+      {
+        "name": "set_rate",
+        "property": {
+          "rate": {
+            "type": "float64"
+          }
+        }
+      },
+      {
+        "name": "reset_rate",
+        "property": {}
+      }
+    ],
+    "cmd_out": [
+      {
+        "name": "flush",
+        "property": {}
+      }
+    ],
+    "audio_frame_out": [
+      {
+        "name": "pcm_frame",
+        "property": {}
+      }
+    ]
+  }
+}
