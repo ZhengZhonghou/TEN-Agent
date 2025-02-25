@@ -1,6 +1,7 @@
 services:
   ten_agent_dev:
     image: ghcr.io/ten-framework/ten_agent_build:0.4.10
+    # image: ten_agent_dev:latest
     container_name: ten_agent_dev
     platform: linux/amd64
     tty: true
@@ -17,6 +18,7 @@ services:
       - .env
     networks:
       - ten_agent_network
+    # command: ["/bin/bash"]
   ten_agent_playground:
     image: ghcr.io/ten-framework/ten_agent_playground:0.8.0-57-g7011424
     container_name: ten_agent_playground
