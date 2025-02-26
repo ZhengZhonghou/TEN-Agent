@@ -192,7 +192,7 @@ class TencentTTSExtension(Extension):
             self.ten_env.log_warn("ttfb_start_ts is None, ignore audio")
             return
 
-        self.ten_env.log_info(
+        self.ten_env.log_debug(
             "audio_bytes len {} ".format(len(audio_bytes))
         )
         if len(audio_bytes) == 0:
