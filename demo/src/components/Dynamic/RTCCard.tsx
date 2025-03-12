@@ -57,7 +57,7 @@ export default function RTCCard(props: { className?: string }) {
     rtcManager.on("localTracksChanged", onLocalTracksChanged)
     rtcManager.on("textChanged", onTextChanged)
     rtcManager.on("remoteUserChanged", onRemoteUserChanged)
-    await rtcManager.createCameraTracks()
+    //await rtcManager.createCameraTracks()
     await rtcManager.createMicrophoneTracks()
     await rtcManager.join({
       channel,

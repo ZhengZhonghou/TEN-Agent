@@ -123,7 +123,6 @@ export function HeaderActions() {
         <GitHubIcon className="h-4 w-4 md:h-5 md:w-5" />
         <span className="sr-only">GitHub</span>
       </NextLink> */}
-      <GitHubStar />
       <HeaderRoomInfo />
       {/* <ThemePalettePopover />
       <NetworkIndicator /> */}

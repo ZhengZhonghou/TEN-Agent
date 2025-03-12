@@ -18,7 +18,7 @@ export const getRandomUserId = (): number => {
 }
 
 export const getRandomChannel = (number = 6) => {
-  return "agora_" + genRandomString(number)
+  return "agent_" + genRandomString(number)
 }
 
 

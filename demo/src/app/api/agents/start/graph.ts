@@ -170,12 +170,18 @@ export const getGraphProperties = (
                 "agora_asr_language": language,
             },
             "llm": {
-                "model": "gpt-4o",
                 "prompt": prompt,
                 "greeting": combined_greeting,
             },
             "tts": {
                 "azure_synthesis_voice_name": voiceNameMap[language]["azure"][voiceType]
+            }
+        }
+    } else if (graphName == "va_openai_tencent") {
+        return {
+            "llm": {
+                "prompt": prompt,
+                "greeting": combined_greeting,
             }
         }
     } else if (graphName == "va_qwen_rag") {
