@@ -1,6 +1,6 @@
 {
   "type": "extension",
-  "name": "agora_tts",
+  "name": "tencent_tts_python",
   "version": "0.1.0",
   "dependencies": [
     {
@@ -15,7 +15,7 @@
         "type": "string"
       },
       "voice_id": {
-        "type": "int"
+        "type": "int32"
       },
       "dump": {
         "type": "bool"
