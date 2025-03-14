@@ -98,7 +98,7 @@ class TencentTTSExtension(Extension):
     def on_init(self, ten_env: TenEnv) -> None:
         ten_env.log_info("TencentTTSExtension on_init")
         try:
-            self.voice_id = ten_env.get_property_string("voice_id")
+            self.voice_id = ten_env.get_property_int("voice_id")
         except Exception as err:
             ten_env.log_warn(f"Error reading voice_id property: {err}")
 
