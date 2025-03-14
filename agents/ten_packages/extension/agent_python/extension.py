@@ -22,8 +22,8 @@ import traceback
 from typing import Iterable
 import uuid
 
-from .openai import OpenAIChatGPTConfig, OpenAIChatGPT
-from .agent import Agent
+from .agent.openai_api import OpenAIChatGPTConfig
+from .agent.agent import Agent
 
 CMD_IN_FLUSH = "flush"
 CMD_IN_ON_USER_JOINED = "on_user_joined"

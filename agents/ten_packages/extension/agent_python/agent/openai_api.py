@@ -12,7 +12,7 @@ import requests
 import time
 from openai import OpenAI
 from openai.types.chat.chat_completion import ChatCompletion
-from .logging import logger
+from .log_agent import logger
 from .helper import parse_sentences
 
 

@@ -4,8 +4,8 @@ import threading
 import queue
 import time
 from .helper import ChatMemory
-from .logging import logger
-from .openai import OpenAIChatGPTConfig, OpenAIChatGPT
+from .log_agent import logger
+from .openai_api import OpenAIChatGPTConfig, OpenAIChatGPT
 
 
 class Agent():
@@ -82,6 +82,3 @@ class Agent():
     def flush(self):
         while not self.queue.empty():
             self.queue.get()
-
-if __name__ == "__main__":
-    agent = Agent()
