@@ -54,7 +54,7 @@ const getInitialState = (): InitialState => {
     language: "en-US",
     voiceType: "male",
     chatItems: [],
-    graphName: "va_openai_azure",
+    graphName: "va_openai_tencent",
     agentSettings: DEFAULT_AGENT_SETTINGS,
     cozeSettings: DEFAULT_COZE_SETTINGS,
     difySettings: DEFAULT_DIFY_SETTINGS,

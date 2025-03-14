@@ -59,7 +59,7 @@ export const GRAPH_OPTIONS: GraphOptionItem[] = [
     value: "va_openai_azure",
   },
   {
-    label: "Voice Agent / STT + LLM + TTS",
+    label: "Order Agent / STT + LLM + TTS",
     value: "va_openai_tencent",
   },
   // {
