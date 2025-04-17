@@ -7,6 +7,7 @@ import AgoraRTC, {
   IRemoteAudioTrack,
   UID, ICameraVideoTrack,
 } from "agora-rtc-sdk-ng"
+import {AIDenoiserExtension, AIDenoiserProcessorLevel} from "agora-extension-ai-denoiser";
 import { EMessageDataType, EMessageType, IChatItem, ITextItem } from "@/types"
 import { AGEventEmitter } from "../events"
 import { RtcEvents, IUserTracks } from "./types"
@@ -65,8 +66,26 @@ export class RtcManager extends AGEventEmitter<RtcEvents> {
   }
 
   async createMicrophoneTracks() {
+    // if (this.localTracks.audioTrack) {
+    //   this.localTracks.audioTrack?.close()
+    // }
+    // try to get denoiser work
+    const denoiser = new AIDenoiserExtension({assetsPath:'./external'});
+    if (!denoiser.checkCompatibility()) {
+      console.error("Does not support AI Denoiser!");
+    }
+    AgoraRTC.registerExtensions([denoiser]);
+    denoiser.onloaderror = (e) => {
+      console.log(e);
+    }
+    const processor = denoiser.createProcessor();
+    
     try {
-      const audioTrack = await AgoraRTC.createMicrophoneAudioTrack();
+      const audioTrack = await AgoraRTC.createMicrophoneAudioTrack({AEC:!0, ANS:!1, AGC:!0});
+      audioTrack.pipe(processor).pipe(audioTrack.processorDestination);
+      await processor.setLevel(AIDenoiserProcessorLevel.SOFT);
+      await processor.enable();
+      audioTrack.setVolume(75);
       this.localTracks.audioTrack = audioTrack;
     } catch (err) {
       console.error("Failed to create audio track", err);

@@ -41,6 +41,9 @@ importers:
       '@reduxjs/toolkit':
         specifier: ^2.2.3
         version: 2.3.0(react-redux@9.1.2(@types/react@18.3.12)(react@18.3.1)(redux@5.0.1))(react@18.3.1)
+      agora-extension-ai-denoiser:
+        specifier: ^1.1.0
+        version: 1.1.0(agora-rtc-sdk-ng@4.22.2)
       agora-rtc-sdk-ng:
         specifier: ^4.21.0
         version: 4.22.2
@@ -1685,6 +1688,11 @@ packages:
     resolution: {integrity: sha512-cl669nCJTZBsL97OF4kUQm5g5hC2uihk0NxY3WENAC0TYdILVkAyHymAntgxGkl7K+t0cXIrH5siy5S4XkFycA==}
     engines: {node: '>=0.4.0'}
     hasBin: true
+
+  agora-extension-ai-denoiser@1.1.0:
+    resolution: {integrity: sha512-g4klzzz7IQblNt0c+gJ/DM7sa5oMZ/7GWE4c9aqs3snHRAo+CjDieT84iAc1KUhAiY84RrfhyFdtpvbbEoYBcA==}
+    peerDependencies:
+      agora-rtc-sdk-ng: '>=4.15.0'
 
   agora-rtc-sdk-ng@4.22.0:
     resolution: {integrity: sha512-mP6BDNP6oV01IQV7yXZ4wIuwDpoHaK6ARiDVKDaD+fK3LXXWqUtCweZLwzTde+OYkauPEsivqNbkAp/q6Ggqtg==}
@@ -5352,6 +5360,10 @@ snapshots:
       acorn: 8.14.0
 
   acorn@8.14.0: {}
+
+  agora-extension-ai-denoiser@1.1.0(agora-rtc-sdk-ng@4.22.2):
+    dependencies:
+      agora-rtc-sdk-ng: 4.22.2
 
   agora-rtc-sdk-ng@4.22.0:
     dependencies:
