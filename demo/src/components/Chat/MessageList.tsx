@@ -36,6 +36,15 @@ export default function MessageList(props: { className?: string }) {
 export function MessageItem(props: { data: IChatItem }) {
   const { data } = props
 
+  const formatText =(text: string) => {
+    return text.split('\n').map((line,i)=>(
+    <React.Fragment key={i}>
+      {line}
+      {i< text.split('\n').length - 1 && <br />}
+      </React.Fragment>
+    ));
+  };
+
   return (
     <>
       <div
@@ -63,7 +72,7 @@ export function MessageItem(props: { data: IChatItem }) {
             <p className={data.data_type === EMessageDataType.REASON ? cn(
               "text-xs",
               "text-zinc-500",
-            ) : ""}>{data.text}</p>
+            ) : ""}>{formatText(data.text)}</p>
           )}
         </div>
       </div>
