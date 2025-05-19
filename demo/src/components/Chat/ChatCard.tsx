@@ -66,21 +66,21 @@ export default function ChatCard(props: { className?: string }) {
 
   const init = async () => {
     console.log("[rtm] init")
-    await rtmManager.init({
-      channel: options.channel,
-      userId: options.userId,
-      appId: options.appId,
-      token: options.token,
-    })
-    dispatch(setRtmConnected(true))
-    rtmManager.on("rtmMessage", onTextChanged)
+    // await rtmManager.init({
+    //   channel: options.channel,
+    //   userId: options.userId,
+    //   appId: options.appId,
+    //   token: options.token,
+    // })
+    // dispatch(setRtmConnected(true))
+    // rtmManager.on("rtmMessage", onTextChanged)
     hasInit = true
   }
   const destory = async () => {
     console.log("[rtm] destory")
-    rtmManager.off("rtmMessage", onTextChanged)
-    await rtmManager.destroy()
-    dispatch(setRtmConnected(false))
+    // rtmManager.off("rtmMessage", onTextChanged)
+    // await rtmManager.destroy()
+    // dispatch(setRtmConnected(false))
     hasInit = false
   }
 
@@ -122,7 +122,7 @@ export default function ChatCard(props: { className?: string }) {
     if (!inputValue || disableInputMemo) {
       return
     }
-    rtmManager.sendText(inputValue)
+    // rtmManager.sendText(inputValue)
     setInputValue("")
   }
 
