@@ -116,6 +116,15 @@ export default function RTCCard(props: { className?: string }) {
     setVideoSourceType(value)
   }
 
+  const onNRStateChange = async (value: boolean) => {
+    if (value) {
+      await rtcManager.denoise_processor?.enable()
+    }
+    else {
+      await rtcManager.denoise_processor?.disable()
+    }
+  }
+
   return (
     <>
       <div className={cn("flex-shrink-0", "overflow-y-auto", className)}>
@@ -134,7 +143,7 @@ export default function RTCCard(props: { className?: string }) {
 
           {/* -- You */}
           <div className="w-full space-y-2 px-2">
-            <MicrophoneBlock audioTrack={audioTrack} />
+            <MicrophoneBlock audioTrack={audioTrack} onNRStateChange={onNRStateChange}/>
             <VideoBlock
               cameraTrack={videoTrack}
               screenTrack={screenTrack}

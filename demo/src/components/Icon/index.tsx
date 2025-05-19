@@ -501,6 +501,61 @@ export const MicIconByStatus = (
   return <MicMuteIcon color={color || "#667085"} {...rest} />
 }
 
+export const NRInActiveIcon = (props: React.SVGProps<SVGSVGElement>) => {
+  return (
+    <svg
+    width={64}
+    height={64}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path
+      d="M3 11v2m3-5v8m3-6v4m3-7v10m3-13v16m3-11v6m3-4v2"
+      stroke="#808080"
+      strokeWidth={1.5}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+  )
+}
+
+export const NRActiveIcon = (props: React.SVGProps<SVGSVGElement>) => {
+  return (
+    <svg
+    width={64}
+    height={64}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path
+      d="M3 11v2m3-5v8m3-6v4m3-7v10m3-13v16m3-11v6m3-4v2"
+      stroke="#3030FF"
+      strokeWidth={1.5}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      fillRule="evenodd"
+      fill="currentColor"
+    />
+    <path d="m5 5 14 14" stroke="#FF0000" strokeLinecap="round" />
+  </svg>
+  )
+}
+
+export const NRIconByStatus = (
+  props: React.SVGProps<SVGSVGElement> & { active?: boolean; color?: string },
+) => {
+  const { active, color, ...rest } = props
+  if (active) {
+    return <NRActiveIcon color={color} {...rest} />
+  }
+  return <NRInActiveIcon color={color} {...rest} />
+}
+
 export const CameraDisabledIcon = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg

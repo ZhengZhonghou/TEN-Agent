@@ -13,11 +13,14 @@ import {
 } from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
 import { MicIconByStatus } from "@/components/Icon"
+import { NRIconByStatus } from "@/components/Icon"
 
 export default function MicrophoneBlock(props: {
   audioTrack?: IMicrophoneAudioTrack
+  onNRStateChange?: (value: boolean) => void
 }) {
-  const { audioTrack } = props
+  const { audioTrack, onNRStateChange } = props
+  const [audioNR, setAudioNR] = React.useState(true)
   const [audioMute, setAudioMute] = React.useState(false)
   const [mediaStreamTrack, setMediaStreamTrack] =
     React.useState<MediaStreamTrack>()
@@ -34,6 +37,10 @@ export default function MicrophoneBlock(props: {
   }, [audioTrack])
 
   React.useEffect(() => {
+    onNRStateChange?.(audioNR)
+  }, [audioNR])
+
+  React.useEffect(() => {
     audioTrack?.setMuted(audioMute)
   }, [audioTrack, audioMute])
 
@@ -48,12 +55,19 @@ export default function MicrophoneBlock(props: {
     setAudioMute(!audioMute)
   }
 
+  const onClickNR = () => {
+    setAudioNR(!audioNR)
+  }
+
   return (
     <CommonDeviceWrapper
       title="MICROPHONE"
-      Icon={MicIconByStatus}
-      onIconClick={onClickMute}
-      isActive={!audioMute}
+      IconNR={NRIconByStatus}
+      onNRIconClick={onClickNR}
+      isNRActive={audioNR}
+      IconMute={MicIconByStatus}
+      onMuteIconClick={onClickMute}
+      isMuteActive={!audioMute}
       select={<MicrophoneSelect audioTrack={audioTrack} />}
     >
       <div className="mt-3 flex h-28 flex-col items-center justify-center gap-2.5 self-stretch rounded-md border border-[#272A2F] bg-[#1E2024] p-6 shadow-[0px_2px_2px_0px_rgba(0,0,0,0.25)]">
@@ -74,27 +88,40 @@ export default function MicrophoneBlock(props: {
 export function CommonDeviceWrapper(props: {
   children: React.ReactNode
   title: string
-  Icon: (
+  IconNR: (
     props: React.SVGProps<SVGSVGElement> & { active?: boolean },
   ) => React.ReactNode
-  onIconClick: () => void
-  isActive: boolean
+  onNRIconClick: () => void
+  isNRActive: boolean
+  IconMute: (
+    props: React.SVGProps<SVGSVGElement> & { active?: boolean },
+  ) => React.ReactNode
+  onMuteIconClick: () => void
+  isMuteActive: boolean
   select?: React.ReactNode
 }) {
-  const { title, Icon, onIconClick, isActive, select, children } = props
+  const { title, IconNR, onNRIconClick, isNRActive, IconMute, onMuteIconClick, isMuteActive, select, children } = props
 
   return (
     <div className="flex flex-col">
       <div className="flex items-center justify-between">
         <div className="text-sm font-medium">{title}</div>
         <div className="flex items-center gap-2">
+        <Button
+            variant="outline"
+            size="icon"
+            className="border-secondary bg-transparent"
+            onClick={onNRIconClick}
+          >
+            <IconNR className="h-5 w-5" active={isNRActive} />
+          </Button>
           <Button
             variant="outline"
             size="icon"
             className="border-secondary bg-transparent"
-            onClick={onIconClick}
+            onClick={onMuteIconClick}
           >
-            <Icon className="h-5 w-5" active={isActive} />
+            <IconMute className="h-5 w-5" active={isMuteActive} />
           </Button>
           {select}
         </div>

@@ -7,7 +7,7 @@ import AgoraRTC, {
   IRemoteAudioTrack,
   UID, ICameraVideoTrack,
 } from "agora-rtc-sdk-ng"
-import {AIDenoiserExtension, AIDenoiserProcessorLevel} from "agora-extension-ai-denoiser";
+import {AIDenoiserExtension, AIDenoiserProcessorLevel, IAIDenoiserProcessor} from "agora-extension-ai-denoiser";
 import { EMessageDataType, EMessageType, IChatItem, ITextItem } from "@/types"
 import { AGEventEmitter } from "../events"
 import { RtcEvents, IUserTracks } from "./types"
@@ -30,6 +30,7 @@ export class RtcManager extends AGEventEmitter<RtcEvents> {
   appId: string | null = null
   token: string | null = null
   userId: number | null = null
+  denoise_processor: IAIDenoiserProcessor | null = null
 
   constructor() {
     super()
@@ -87,6 +88,7 @@ export class RtcManager extends AGEventEmitter<RtcEvents> {
       await processor.enable();
       audioTrack.setVolume(75);
       this.localTracks.audioTrack = audioTrack;
+      this.denoise_processor = processor
     } catch (err) {
       console.error("Failed to create audio track", err);
     }
