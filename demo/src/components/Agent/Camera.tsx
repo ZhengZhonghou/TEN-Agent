@@ -45,7 +45,7 @@ export function VideoDeviceWrapper(props: {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <div className="text-sm font-medium">{props.title}</div>
-          <div className="w-[150px]">
+          <div className="w-[100px]">
             <Select value={videoSourceType} onValueChange={onVideoSourceChange}>
               <SelectTrigger>
                 <SelectValue />
@@ -103,7 +103,7 @@ export default function VideoBlock(props: {
       isActive={!videoMute}
       videoSourceType={videoSourceType}
       onVideoSourceChange={onVideoSourceChange}
-      select={videoSourceType === VideoSourceType.CAMERA ? <CamSelect videoTrack={cameraTrack} /> : <div className="w-[180px]" />}
+      select={videoSourceType === VideoSourceType.CAMERA ? <CamSelect videoTrack={cameraTrack} /> : <div className="w-[150px]" />}
     >
       <div className="my-3 h-52 w-full overflow-hidden rounded-lg">
         <LocalStreamPlayer videoTrack={videoSourceType === VideoSourceType.CAMERA ? cameraTrack : screenTrack} />

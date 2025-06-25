@@ -61,7 +61,7 @@ export default function MicrophoneBlock(props: {
 
   return (
     <CommonDeviceWrapper
-      title="MICROPHONE"
+      title="MIC"
       IconNR={NRIconByStatus}
       onNRIconClick={onClickNR}
       isNRActive={audioNR}
@@ -153,7 +153,7 @@ export const DeviceSelect = (props: {
 
   return (
     <Select value={value} onValueChange={onChange}>
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger className="w-[150px]">
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>

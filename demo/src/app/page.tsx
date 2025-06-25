@@ -31,7 +31,7 @@ export default function Home() {
         <div className="mx-2 mb-2 flex h-full max-h-[calc(100vh-108px-24px)] flex-col md:flex-row md:gap-2">
           <DynamicRTCCard
             className={cn(
-              "m-0 w-full rounded-b-lg bg-[#181a1d] md:w-[480px] md:rounded-lg",
+              "m-0 w-full rounded-b-lg bg-[#181a1d] md:w-[320px] md:rounded-lg",
               {
                 ["hidden md:block"]: mobileActiveTab === EMobileActiveTab.CHAT,
               },
