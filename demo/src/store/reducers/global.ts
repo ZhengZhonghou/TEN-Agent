@@ -96,7 +96,7 @@ export const globalSlice = createSlice({
       let LastNonFinalItem = state.chatItems[LastNonFinalIndex]
       if (LastFinalItem) {
         // has last final Item
-        if (time <= LastFinalItem.time) {
+        if (time < LastFinalItem.time) {
           // discard
           console.log(
             "[test] addChatItem, time < last final item, discard!:",
