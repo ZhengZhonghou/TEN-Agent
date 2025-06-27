@@ -191,9 +191,10 @@ class OpenAIChatGPT:
                         ] = tool_call.function.name
 
                     # Append the arguments
-                    tool_calls_dict[tool_call.index]["function"][
-                        "arguments"
-                    ] += tool_call.function.arguments
+                    if tool_call.function.arguments is not None:
+                        tool_calls_dict[tool_call.index]["function"][
+                            "arguments"
+                        ] += tool_call.function.arguments
 
                     # If the type is not None, set it
                     if tool_call.type is not None:

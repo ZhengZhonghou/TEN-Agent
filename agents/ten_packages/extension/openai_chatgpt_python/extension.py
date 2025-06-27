@@ -180,7 +180,7 @@ class OpenAIChatGPTExtension(AsyncLLMBaseExtension):
         try:
             async_ten_env.log_info(f"for input text: [{messages}] memory: {memory}")
             tools = None
-            no_tool = kargs.get("no_tool", True)
+            no_tool = kargs.get("no_tool", False)
 
             for message in messages:
                 if (
