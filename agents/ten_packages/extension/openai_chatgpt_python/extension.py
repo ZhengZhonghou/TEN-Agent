@@ -424,3 +424,26 @@ class OpenAIChatGPTExtension(AsyncLLMBaseExtension):
         except Exception:
             async_ten_env.log_warn(
                 f"send sentence [{sentence}] failed, err: {traceback.format_exc()}")
+
+    def send_image_url(
+        self, async_ten_env: AsyncTenEnv, image_url: str
+    ):
+        try:
+            output_data = Data.create(CONTENT_DATA_OUT_NAME)
+            output_data.set_property_string(DATA_OUT_PROPERTY_TEXT, json.dumps({
+                "id":str(uuid.uuid4())[:8],
+                "data": {
+                    "image_url": image_url
+                },
+                "type": "image_url"
+            }))
+            output_data.set_property_bool(
+                DATA_OUT_PROPERTY_END_OF_SEGMENT, True
+            )
+            asyncio.create_task(async_ten_env.send_data(output_data))
+            async_ten_env.log_info(
+                f"send image_url {image_url}"
+            )
+        except Exception:
+            async_ten_env.log_warn(
+                f"send image_url [{image_url}] failed, err: {traceback.format_exc()}")
