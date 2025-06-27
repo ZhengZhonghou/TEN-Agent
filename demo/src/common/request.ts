@@ -126,3 +126,17 @@ export const apiPing = async (channel: string) => {
   resp = resp.data || {}
   return resp
 }
+
+export const apiSendMessage = async (channel: string, user_uid: number, message: string) => {
+  // the request will be rewrite at middleware.tsx to send to $AGENT_SERVER_URL
+  const url = `/api/agents/message`
+  const data = {
+    request_id: genUUID(),
+    channel_name: channel,
+    user_uid: user_uid,
+    message: message,
+  }
+  let resp: any = await axios.post(url, data)
+  resp = resp.data || {}
+  return resp
+}

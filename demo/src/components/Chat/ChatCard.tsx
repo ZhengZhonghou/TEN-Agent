@@ -10,6 +10,7 @@ import MessageList from "@/components/Chat/MessageList"
 import { Button } from "@/components/ui/button"
 import { Send } from "lucide-react"
 import { rtmManager } from "@/manager/rtm"
+import { apiSendMessage } from "@/common"
 import { type IRTMTextItem, EMessageDataType, EMessageType, ERTMTextType } from "@/types"
 
 let hasInit: boolean = false
@@ -26,11 +27,11 @@ export default function ChatCard(props: { className?: string }) {
 
   const disableInputMemo = React.useMemo(() => {
     return (
-      !options.channel ||
-      !options.userId ||
-      !options.appId ||
-      !options.token ||
-      !rtmConnected ||
+    //  !options.channel ||
+    //  !options.userId ||
+    //  !options.appId ||
+    //  !options.token ||
+    //  !rtmConnected ||
       !agentConnected
     )
   }, [
@@ -123,6 +124,8 @@ export default function ChatCard(props: { className?: string }) {
       return
     }
     // rtmManager.sendText(inputValue)
+    apiSendMessage(options.channel, options.userId, inputValue)
+    console.log("submit input text message", inputValue);
     setInputValue("")
   }
 
@@ -145,7 +148,7 @@ export default function ChatCard(props: { className?: string }) {
           <MessageList />
           <div
             className={cn("border-t pt-4", {
-              ["hidden"]: !graphName.includes("rtm"), // TODO: TMP use rtm key word
+              ["hidden"]: false, // message without rtm
             })}
           >
             <form
