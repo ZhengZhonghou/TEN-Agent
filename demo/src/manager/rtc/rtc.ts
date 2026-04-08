@@ -16,6 +16,16 @@ import { VideoSourceType } from "@/common/constant"
 
 const TIMEOUT_MS = 5000; // Timeout for incomplete messages
 
+// Helper function to decode base64 to UTF-8 string
+function decodeBase64ToUtf8(base64: string): string {
+  const binaryString = atob(base64);
+  const bytes = new Uint8Array(binaryString.length);
+  for (let i = 0; i < binaryString.length; i++) {
+    bytes[i] = binaryString.charCodeAt(i);
+  }
+  return new TextDecoder('utf-8').decode(bytes);
+}
+
 interface TextDataChunk {
   message_id: string;
   part_index: number;
@@ -248,7 +258,7 @@ export class RtcManager extends AGEventEmitter<RtcEvents> {
       // If all parts are received, reconstruct the message
       if (this.messageCache[message_id].length === total_parts) {
         const completeMessage = this.reconstructMessage(this.messageCache[message_id]);
-        const { stream_id, is_final, text, text_ts, data_type } = JSON.parse(atob(completeMessage));
+        const { stream_id, is_final, text, text_ts, data_type } = JSON.parse(decodeBase64ToUtf8(completeMessage));
         const isAgent = Number(stream_id) != Number(this.userId)
 
         let textItem: IChatItem = {
