@@ -4,7 +4,6 @@ import {
   useAutoScroll,
   LANGUAGE_OPTIONS,
   useAppSelector,
-  GRAPH_OPTIONS,
   isRagGraph,
 } from "@/common"
 import { Bot, Brain, MessageCircleQuestion } from "lucide-react"
@@ -36,11 +35,11 @@ export default function MessageList(props: { className?: string }) {
 export function MessageItem(props: { data: IChatItem }) {
   const { data } = props
 
-  const formatText =(text: string) => {
-    return text.split('\n').map((line,i)=>(
-    <React.Fragment key={i}>
-      {line}
-      {i< text.split('\n').length - 1 && <br />}
+  const formatText = (text: string) => {
+    return text.split('\n').map((line, i) => (
+      <React.Fragment key={i}>
+        {line}
+        {i < text.split('\n').length - 1 && <br />}
       </React.Fragment>
     ));
   };

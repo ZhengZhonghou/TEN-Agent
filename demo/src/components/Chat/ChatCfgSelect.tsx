@@ -1,11 +1,10 @@
 "use client"
 
+import * as React from "react"
 import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
@@ -13,7 +12,8 @@ import {
   useAppDispatch,
   LANGUAGE_OPTIONS,
   useAppSelector,
-  GRAPH_OPTIONS,
+  apiGetGraphList,
+  type AgentGraphItem,
 } from "@/common"
 import type { Language } from "@/types"
 import { setGraphName, setLanguage } from "@/store/reducers/global"
@@ -22,6 +22,50 @@ export function GraphSelect() {
   const dispatch = useAppDispatch()
   const graphName = useAppSelector((state) => state.global.graphName)
   const agentConnected = useAppSelector((state) => state.global.agentConnected)
+  const [graphOptions, setGraphOptions] = React.useState<AgentGraphItem[]>([])
+  const [loading, setLoading] = React.useState(true)
+  const [error, setError] = React.useState<string | null>(null)
+
+  React.useEffect(() => {
+    let cancelled = false
+
+    const fetchGraphs = async () => {
+      try {
+        const data = await apiGetGraphList()
+        if (!cancelled) {
+          setGraphOptions(data)
+        }
+      } catch (err) {
+        if (!cancelled) {
+          setError("Failed to load graph list")
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false)
+        }
+      }
+    }
+
+    fetchGraphs()
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  React.useEffect(() => {
+    if (graphOptions.length === 0) {
+      return
+    }
+
+    const hasSelectedGraph = graphOptions.some(
+      (item) => item.graph_id === graphName,
+    )
+
+    if (!hasSelectedGraph) {
+      dispatch(setGraphName(graphOptions[0].graph_id))
+    }
+  }, [dispatch, graphName, graphOptions])
+
   const onGraphNameChange = (val: string) => {
     dispatch(setGraphName(val))
   }
@@ -31,19 +75,31 @@ export function GraphSelect() {
       <Select
         value={graphName}
         onValueChange={onGraphNameChange}
-        disabled={agentConnected}
+        disabled={agentConnected || loading || graphOptions.length === 0}
       >
         <SelectTrigger className="w-auto max-w-full">
-          <SelectValue placeholder="Graph" />
+          <SelectValue placeholder={loading ? "Loading graphs..." : "Graph"} />
         </SelectTrigger>
         <SelectContent>
-          {GRAPH_OPTIONS.map((item) => {
-            return (
-              <SelectItem value={item.value} key={item.value}>
-                {item.label}
+          {loading ? (
+            <SelectItem value="loading" key="loading" disabled>
+              Loading graphs...
+            </SelectItem>
+          ) : error ? (
+            <SelectItem value="error" key="error" disabled>
+              {error}
+            </SelectItem>
+          ) : graphOptions.length === 0 ? (
+            <SelectItem value="no-graphs" key="empty" disabled>
+              No graphs available
+            </SelectItem>
+          ) : (
+            graphOptions.map((item) => (
+              <SelectItem value={item.graph_id} key={item.graph_id}>
+                {item.name || item.graph_id}
               </SelectItem>
-            )
-          })}
+            ))
+          )}
         </SelectContent>
       </Select>
     </>

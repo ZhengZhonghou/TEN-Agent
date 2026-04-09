@@ -84,6 +84,22 @@ export const apiStopService = async (channel: string) => {
   return resp
 }
 
+export interface AgentGraphItem {
+  graph_id: string
+  name: string
+  auto_start?: boolean
+}
+
+export const apiGetGraphList = async (): Promise<AgentGraphItem[]> => {
+  const url = `/api/agents/graphs`
+  let resp: any = await axios.get(url)
+  resp = resp.data || {}
+  if (resp.code !== "0") {
+    throw new Error(resp.msg || "Failed to load graph list")
+  }
+  return Array.isArray(resp.data) ? resp.data : []
+}
+
 export const apiGetDocumentList = async () => {
   // the request will be rewrite at middleware.tsx to send to $AGENT_SERVER_URL
   const url = `/api/vector/document/preset/list`
